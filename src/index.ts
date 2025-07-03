@@ -2,6 +2,7 @@
 // so configuring dotenv has to take place in a separate file. Juck FavaScript.
 import "./loadEnv.ts";
 import express from "express";
+import morgan from "morgan";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -13,4 +14,7 @@ app.listen(PORT, () => {
 
 app.get("/", (req, res) => {
   res.send("is this thing on? " + Math.random());
+app.use(express.json());
+app.use(morgan("dev"));
+
 });
