@@ -1,12 +1,12 @@
 // ESM Thinks I'm too stupid to know what order I want to execute my own code in,
 // so configuring dotenv has to take place in a separate file. Juck FavaScript.
 import "./loadEnv.ts";
+import db from "../db/index.ts";
 import express from "express";
 import morgan from "morgan";
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-console.log(process.env.PORT);
+const PORT = process.env.SERVERPORT || 3001;
 
 app.listen(PORT, () => {
   console.log("Server up on port " + PORT);
@@ -26,13 +26,14 @@ app.use(morgan("dev"));
 //   console.log(req.body);
 //   res.json({ body: req.body, randNum: Math.random() });
 // });
-//
-// app.get("/api/v1/weapons", (req, res) => {
-//   res.json({
-//     data: {},
-//   });
-// });
-//
+
+app.get("/api/v1/weapons", async (req, res) => {
+  const { rows } = await db.query("SELECT * FROM weapons");
+  res.json({
+    data: { rows },
+  });
+});
+
 // app.get("/api/v1/weapons/:id", (req, res) => {
 //   const params = req.params;
 //   console.log(params);
