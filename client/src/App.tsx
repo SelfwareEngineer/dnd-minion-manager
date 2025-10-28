@@ -49,11 +49,6 @@ function App() {
 
 	// TODO: Load minion data from local storage or backend
 
-	// WARN: - Dev only; remove before production, as well as getTestData function
-	if (Object.keys(minionData).length === 0) {
-		setMinionData(getTestData());
-	}
-
 	return (
 		<div className={pageStyle}>
 			<div className="minionContainer flex gap-4 mb-8">
@@ -61,6 +56,18 @@ function App() {
 					<Minion key={minion.id} minionData={minion} />
 				))}
 			</div>
+			{/*WARN: Dev only. Remove for production. */}
+			<button
+				className="px-4 py-2 bg-green-600 rounded hover:bg-green-700"
+				onClick={() =>
+					setMinionData((prevData) => ({
+						...prevData,
+						...getTestData(),
+					}))
+				}
+			>
+				Add Test Minions
+			</button>
 		</div>
 	);
 }
