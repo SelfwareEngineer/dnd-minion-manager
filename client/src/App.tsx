@@ -11,36 +11,40 @@ function App() {
 		alt: "5e zombie portrait",
 	};
 
-	const minionData: { [key: string]: MinionProps } = {
-		hurgus: {
-			id: 1,
-			portrait: zombiePortraitData,
-			name: "Hurgus",
-			maxHealth: 22,
-			currentHealth: 22,
-		},
-		burgus: {
-			id: 2,
-			portrait: zombiePortraitData,
-			name: "Burgus",
-			maxHealth: 18,
-			currentHealth: 18,
-		},
-		borgus: {
-			id: 3,
-			portrait: zombiePortraitData,
-			name: "Borgus",
-			maxHealth: 20,
-			currentHealth: 20,
-		},
-		bingus: {
-			id: 4,
-			portrait: zombiePortraitData,
-			name: "Bingus",
-			maxHealth: 25,
-			currentHealth: 25,
-		},
-	};
+	function getTestData(): { [key: string]: MinionProps } {
+		return {
+			hurgus: {
+				id: 1,
+				portrait: zombiePortraitData,
+				name: "Hurgus",
+				maxHealth: 22,
+				currentHealth: 22,
+			},
+			burgus: {
+				id: 2,
+				portrait: zombiePortraitData,
+				name: "Burgus",
+				maxHealth: 18,
+				currentHealth: 18,
+			},
+			borgus: {
+				id: 3,
+				portrait: zombiePortraitData,
+				name: "Borgus",
+				maxHealth: 20,
+				currentHealth: 20,
+			},
+			bingus: {
+				id: 4,
+				portrait: zombiePortraitData,
+				name: "Bingus",
+				maxHealth: 25,
+				currentHealth: 25,
+			},
+		};
+	}
+
+	const minionData = getTestData();
 
 	return (
 		<div className={pageStyle}>
