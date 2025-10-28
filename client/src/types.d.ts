@@ -10,3 +10,5 @@ type MinionProps = {
 	maxHealth: number;
 	currentHealth: number;
 };
+
+type MinionList = { [key: string]: MinionProps };

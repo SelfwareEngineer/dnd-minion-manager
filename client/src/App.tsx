@@ -1,3 +1,4 @@
+import { useState } from "react";
 import zombiePortrait from "./assets/zombiePortrait.webp";
 
 import Minion from "./components/Minion";
@@ -11,7 +12,7 @@ function App() {
 		alt: "5e zombie portrait",
 	};
 
-	function getTestData(): { [key: string]: MinionProps } {
+	function getTestData(): MinionList {
 		return {
 			hurgus: {
 				id: 1,
@@ -44,7 +45,14 @@ function App() {
 		};
 	}
 
-	const minionData = getTestData();
+	const [minionData, setMinionData] = useState<MinionList>({});
+
+	// TODO: Load minion data from local storage or backend
+
+	// WARN: - Dev only; remove before production, as well as getTestData function
+	if (Object.keys(minionData).length === 0) {
+		setMinionData(getTestData());
+	}
 
 	return (
 		<div className={pageStyle}>
