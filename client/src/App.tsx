@@ -5,9 +5,6 @@ import Minion from "./components/Minion";
 import NewMinionForm from "./components/NewMinionForm";
 
 function App() {
-	const pageStyle =
-		"h-screen p-5 bg-gray-800 text-white flex flex-col items-center";
-
 	const zombiePortraitData = {
 		source: zombiePortrait,
 		alt: "5e zombie portrait",
@@ -55,7 +52,7 @@ function App() {
 	function addMinion(e: React.FormEvent) {
 		e.preventDefault();
 		const form = e.target as HTMLFormElement;
-		const newKey = Date.now(); // simple unique key based on timestamp
+		const newKey = Date.now();
 		const newMinionData = new FormData(form);
 
 		const minionHealth = Number(newMinionData.get("maxHealth"));
@@ -75,6 +72,9 @@ function App() {
 	}
 
 	// TODO: Load minion data from local storage or backend
+
+	const pageStyle =
+		"h-screen p-5 bg-gray-800 text-white flex flex-col items-center";
 
 	return (
 		<div className={pageStyle}>

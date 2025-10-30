@@ -6,7 +6,7 @@ type Props = {
 export default function Minion({ minionData, handleDelete }: Props) {
 	const { portrait, name, maxHealth, currentHealth } = minionData;
 	return (
-		<div className="minionCard flex border rounded-md p-2">
+		<div className="minionCard flex items-center gap-3 border rounded-md p-2">
 			<div className="portraitContainer w-12 h-12 rounded-sm mr-5 overflow-hidden">
 				<img
 					className="h-full w-full object-cover"
@@ -23,7 +23,7 @@ export default function Minion({ minionData, handleDelete }: Props) {
 			</div>
 			<button
 				onClick={handleDelete}
-				className="text-red-700 hover:text-red-800"
+				className="px-2 py-0.5 bg-red-800 hover:bg-red-900 rounded-sm"
 			>
 				Delete
 			</button>
