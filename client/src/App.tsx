@@ -14,29 +14,25 @@ function App() {
 
 	function getTestData(): MinionList {
 		return {
-			hurgus: {
-				id: 1,
+			1: {
 				portrait: zombiePortraitData,
 				name: "Hurgus",
 				maxHealth: 22,
 				currentHealth: 22,
 			},
-			burgus: {
-				id: 2,
+			2: {
 				portrait: zombiePortraitData,
 				name: "Burgus",
 				maxHealth: 18,
 				currentHealth: 18,
 			},
-			borgus: {
-				id: 3,
+			3: {
 				portrait: zombiePortraitData,
 				name: "Borgus",
 				maxHealth: 20,
 				currentHealth: 20,
 			},
-			bingus: {
-				id: 4,
+			4: {
 				portrait: zombiePortraitData,
 				name: "Bingus",
 				maxHealth: 25,
@@ -47,14 +43,29 @@ function App() {
 
 	const [minionData, setMinionData] = useState<MinionList>({});
 
+	function deleteMinion(minionKey: number) {
+		setMinionData((prevData) => {
+			const newData = { ...prevData };
+			delete newData[minionKey];
+			return newData;
+		});
+	}
 	// TODO: Load minion data from local storage or backend
 
 	return (
 		<div className={pageStyle}>
 			<div className="minionContainer flex gap-4 mb-8">
-				{Object.values(minionData).map((minion) => (
-					<Minion key={minion.id} minionData={minion} />
-				))}
+				{Object.entries(minionData).map((minionEntry) => {
+					return (
+						<Minion
+							key={minionEntry[0]}
+							minionData={minionEntry[1]}
+							handleDelete={() =>
+								deleteMinion(Number(minionEntry[0]))
+							}
+						/>
+					);
+				})}
 			</div>
 			{/*WARN: Dev only. Remove for production. */}
 			<button

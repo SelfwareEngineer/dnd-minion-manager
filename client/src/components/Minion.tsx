@@ -1,6 +1,9 @@
-// Props input here is nice and concise in App.tsx, but feels a bit verbose
-// here. Is there a way to make this cleaner?
-export default function Minion({ minionData }: { minionData: MinionProps }) {
+type Props = {
+	minionData: MinionProps;
+	handleDelete: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+export default function Minion({ minionData, handleDelete }: Props) {
 	const { portrait, name, maxHealth, currentHealth } = minionData;
 	return (
 		<div className="minionCard flex border rounded-md p-2">
@@ -18,6 +21,12 @@ export default function Minion({ minionData }: { minionData: MinionProps }) {
 					Health: {currentHealth} / {maxHealth}
 				</p>
 			</div>
+			<button
+				onClick={handleDelete}
+				className="text-red-700 hover:text-red-800"
+			>
+				Delete
+			</button>
 		</div>
 	);
 }

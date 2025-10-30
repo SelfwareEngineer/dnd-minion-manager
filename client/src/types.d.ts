@@ -4,11 +4,10 @@ type ImgData = {
 };
 
 type MinionProps = {
-	id?: number;
 	portrait: ImgData;
 	name: string;
 	maxHealth: number;
 	currentHealth: number;
 };
 
-type MinionList = { [key: string]: MinionProps };
+type MinionList = { [key: number]: MinionProps };
