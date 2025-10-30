@@ -2,6 +2,7 @@ import { useState } from "react";
 import zombiePortrait from "./assets/zombiePortrait.webp";
 
 import Minion from "./components/Minion";
+import NewMinionForm from "./components/NewMinionForm";
 
 function App() {
 	const pageStyle =
@@ -50,6 +51,29 @@ function App() {
 			return newData;
 		});
 	}
+
+	function addMinion(e: React.FormEvent) {
+		e.preventDefault();
+		const form = e.target as HTMLFormElement;
+		const newKey = Date.now(); // simple unique key based on timestamp
+		const newMinionData = new FormData(form);
+
+		const minionHealth = Number(newMinionData.get("maxHealth"));
+		const newMinion: MinionProps = {
+			portrait: zombiePortraitData,
+			name: newMinionData.get("name") as string,
+			maxHealth: minionHealth,
+			currentHealth: minionHealth,
+		};
+
+		setMinionData((prevData) => ({
+			...prevData,
+			[newKey]: newMinion,
+		}));
+
+		form.reset();
+	}
+
 	// TODO: Load minion data from local storage or backend
 
 	return (
@@ -79,6 +103,7 @@ function App() {
 			>
 				Add Test Minions
 			</button>
+			<NewMinionForm handleSubmit={addMinion} />
 		</div>
 	);
 }
