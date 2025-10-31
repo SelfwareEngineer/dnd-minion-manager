@@ -1,8 +1,10 @@
 // TODO:
+// - Prevent form submissions from appearing in URL bar
 // - Investigate convention for extracting handlers to separate files
 //   - Could do a `deleteFromState` util function that takes a key and state
 //     setter but that seems a bit smelly. Want to see if there's a better
 //     pattern.
+// - Add isDead state to minions and greyed out CSS for visual indicator
 // - Load minion data from local storage or backend
 
 import { useState } from "react";
