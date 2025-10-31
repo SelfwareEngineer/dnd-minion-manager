@@ -1,44 +1,18 @@
+// TODO:
+// - Investigate convention for extracting handlers to separate files
+//   - Could do a `deleteFromState` util function that takes a key and state
+//     setter but that seems a bit smelly. Want to see if there's a better
+//     pattern.
+// - Load minion data from local storage or backend
+
 import { useState } from "react";
-import zombiePortrait from "./assets/zombiePortrait.webp";
+import { zombiePortraitData } from "./modules/portraitData";
+import getTestData from "./modules/getTestData";
 
 import Minion from "./components/Minion";
 import NewMinionForm from "./components/NewMinionForm";
 
 function App() {
-	const zombiePortraitData = {
-		source: zombiePortrait,
-		alt: "5e zombie portrait",
-	};
-
-	function getTestData(): MinionList {
-		return {
-			1: {
-				portrait: zombiePortraitData,
-				name: "Hurgus",
-				maxHealth: 22,
-				currentHealth: 22,
-			},
-			2: {
-				portrait: zombiePortraitData,
-				name: "Burgus",
-				maxHealth: 18,
-				currentHealth: 18,
-			},
-			3: {
-				portrait: zombiePortraitData,
-				name: "Borgus",
-				maxHealth: 20,
-				currentHealth: 20,
-			},
-			4: {
-				portrait: zombiePortraitData,
-				name: "Bingus",
-				maxHealth: 25,
-				currentHealth: 25,
-			},
-		};
-	}
-
 	const [minionData, setMinionData] = useState<MinionList>({});
 
 	function deleteMinion(minionKey: number) {
@@ -70,8 +44,6 @@ function App() {
 
 		form.reset();
 	}
-
-	// TODO: Load minion data from local storage or backend
 
 	const pageStyle =
 		"h-screen p-5 bg-gray-800 text-white flex flex-col items-center";
