@@ -1,15 +1,11 @@
 // TODO:
 // - Prevent form submissions from appearing in URL bar
-// - Investigate convention for extracting handlers to separate files
-//   - Could do a `deleteFromState` util function that takes a key and state
-//     setter but that seems a bit smelly. Want to see if there's a better
-//     pattern.
 // - Add isDead state to minions and greyed out CSS for visual indicator
 // - Load minion data from local storage or backend
 
 import { useState } from "react";
-import { zombiePortraitData } from "./modules/portraitData";
 import getTestData from "./modules/getTestData";
+import getMinionFromForm from "./modules/getMinionFromForm";
 
 import Minion from "./components/Minion";
 import NewMinionForm from "./components/NewMinionForm";
@@ -25,27 +21,22 @@ function App() {
 		});
 	}
 
-	function addMinion(e: React.FormEvent) {
-		e.preventDefault();
-		const form = e.target as HTMLFormElement;
-		const newKey = Date.now();
-		const newMinionData = new FormData(form);
-
-		const minionHealth = Number(newMinionData.get("maxHealth"));
-		const newMinion: MinionProps = {
-			portrait: zombiePortraitData,
-			name: newMinionData.get("name") as string,
-			maxHealth: minionHealth,
-			currentHealth: minionHealth,
-		};
+	function addMinion(e: React.FormEvent<HTMLFormElement>) {
+		const newMinion = getMinionFromForm(e);
 
 		setMinionData((prevData) => ({
 			...prevData,
-			[newKey]: newMinion,
+			...newMinion,
 		}));
-
-		form.reset();
 	}
+
+	const renderedMinions = Object.entries(minionData).map(([key, minion]) => (
+		<Minion
+			key={key}
+			minionData={minion}
+			handleDelete={() => deleteMinion(Number(key))}
+		/>
+	));
 
 	const pageStyle =
 		"h-screen p-5 bg-gray-800 text-white flex flex-col items-center";
@@ -53,17 +44,7 @@ function App() {
 	return (
 		<div className={pageStyle}>
 			<div className="minionContainer flex gap-4 mb-8">
-				{Object.entries(minionData).map((minionEntry) => {
-					return (
-						<Minion
-							key={minionEntry[0]}
-							minionData={minionEntry[1]}
-							handleDelete={() =>
-								deleteMinion(Number(minionEntry[0]))
-							}
-						/>
-					);
-				})}
+				{renderedMinions}
 			</div>
 			{/*WARN: Dev only. Remove for production. */}
 			<button
