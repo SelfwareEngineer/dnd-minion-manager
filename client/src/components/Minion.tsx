@@ -6,8 +6,8 @@ type Props = {
 export default function Minion({ minionData, handleDelete }: Props) {
 	const { portrait, name, maxHealth, currentHealth } = minionData;
 	return (
-		<div className="minionCard flex items-center gap-3 border rounded-md p-2">
-			<div className="portraitContainer w-12 h-12 rounded-sm mr-5 overflow-hidden">
+		<div className="bg-gray-800 flex items-center gap-3 border rounded-md p-2">
+			<div className="w-12 h-12 rounded-sm mr-5 overflow-hidden">
 				<img
 					className="h-full w-full object-cover"
 					src={portrait.source}

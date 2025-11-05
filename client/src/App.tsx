@@ -1,4 +1,10 @@
 // TODO:
+// - Talk with Lou about using the foundry server as a backend
+// - Finish refactoring Minion list styling to CSS grid for better responsiveness
+// - Refactor getTestData and getMinionFromForm
+//   - Extract static data to `getZombie()` function
+//   - Extract dynamic test data to separate JSON file
+//   - Have getMinionFromForm call the appropriate get<MinionType>() function
 // - Prevent form submissions from appearing in URL bar
 // - Add isDead state to minions and greyed out CSS for visual indicator
 // - Load minion data from local storage or backend
@@ -39,11 +45,11 @@ function App() {
 	));
 
 	const pageStyle =
-		"h-screen p-5 bg-gray-800 text-white flex flex-col items-center";
+		"h-1/1 p-5 bg-gray-900 text-white flex flex-col items-center";
 
 	return (
 		<div className={pageStyle}>
-			<div className="minionContainer flex gap-4 mb-8">
+			<div className="minionContainer grid grid-cols-3 gap-4 mb-8">
 				{renderedMinions}
 			</div>
 			{/*WARN: Dev only. Remove for production. */}
